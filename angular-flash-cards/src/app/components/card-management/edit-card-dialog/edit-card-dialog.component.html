@@ -1,0 +1,51 @@
+<div mat-dialog-title style="text-align: center;">Edit Card</div>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+  <div class="vertical-center">
+
+    <div class="horizontal-center">
+      <mat-card class="card-panel">
+        <mat-card-header>
+          <div class="card-panel-header">
+            <mat-card-title>Front</mat-card-title>
+          </div>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-content class="card-panel-content" style="overflow: hidden">
+          <textarea [(ngModel)]="editedCard.front" style="width: 100%; height: 100%">{{originalCard.front}}</textarea>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="horizontal-center" style="margin-top: 30px">
+      <mat-card class="card-panel">
+        <mat-card-header>
+          <div class="card-panel-header">
+            <mat-card-title>Back</mat-card-title>
+          </div>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-content class="card-panel-content" style="overflow: hidden">
+          <textarea [(ngModel)]="editedCard.back" style="width: 100%; height: 100%">{{originalCard.front}}</textarea>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <div class="horizontal-center">
+    <button mat-raised-button color="primary" (click)="onEditClick()">Edit</button>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <button mat-raised-button type="button" (click)="onCloseClick()">Close</button>
+  </div>
+</div>

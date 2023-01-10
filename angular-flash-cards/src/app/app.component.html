@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="card-content" routerLinkActive="active"> Cards </a>
+    <a mat-menu-item routerLink="card-management" routerLinkActive="active"> Card Management </a>
+  </mat-menu>
+  <span>Flash Card Application</span>
+</mat-toolbar>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

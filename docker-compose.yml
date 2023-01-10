@@ -1,0 +1,37 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: flash_cards
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  springboot:
+    container_name: springboot
+    build: springboot-flash-cards/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  angular_nginx:
+    container_name: angular_nginx
+    build: angular-flash-cards
+    ports:
+      - "80:80"
+    depends_on:
+      - springboot
+    links:
+      - springboot
+
+volumes:
+  postgres:

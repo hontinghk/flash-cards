@@ -1,0 +1,75 @@
+<div class="card-list-container">
+  <div style="text-align: right;">
+    <button mat-flat-button color="primary" (click)="openCreateCardDialog()">
+      <div class="text-with-icon">Add Card <mat-icon>add</mat-icon></div>
+    </button>
+  </div>
+
+  <!-- Card Table -->
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let card"> {{card[column.toLowerCase()]}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let card">
+        <button mat-icon-button aria-label="expand row"
+          (click)="(expandedCard = expandedCard === card ? null : card); $event.stopPropagation()">
+          <mat-icon *ngIf="expandedCard !== card">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="expandedCard === card">keyboard_arrow_up</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let card" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="card-detail" [@detailExpand]="card == expandedCard ? 'expanded' : 'collapsed'">
+          <div class="horizontal-center">
+            <mat-card class="card-panel">
+              <mat-card-header>
+                <div class="card-panel-header">
+                  <mat-card-title>{{front ? "Front" : "Back"}}</mat-card-title>
+                  <mat-card-title>
+                    <button mat-icon-button matTooltip="Basic" (click)="openEditCardDialog()">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Basic" (click)="openDeleteCardDialog()">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </mat-card-title>
+                </div>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+
+              <mat-card-content class="card-panel-content">
+                <span>{{front ? card.front : card.back}}</span>
+              </mat-card-content>
+
+              <mat-divider></mat-divider>
+
+              <mat-card-actions class="card-panel-footer">
+                <button mat-raised-button (click)="flipOnClick()">
+                  <div class="text-with-icon">Flip <mat-icon>refresh</mat-icon></div>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let card; columns: columnsToDisplayWithExpand;" class="card-row"
+      [class.expanded-row]="expandedCard === card" (click)="expandedCard = expandedCard === card ? null : card">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+
+  <!-- Spinner for loading cards -->
+  <div *ngIf="dataSource.loading$ | async" class="horizontal-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

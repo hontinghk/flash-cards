@@ -1,0 +1,37 @@
+<div *ngIf="cards.length <= 0" style="margin-top: 30px">
+    <span>No Card.<br>Go to Management tab to add a new card.</span>
+    
+</div>
+
+<div *ngIf="cards.length > 0" class="horizontal-center">
+    <mat-card class="card-panel" style="margin-top: 30px">
+        <mat-card-header>
+            <div class="card-panel-header">
+                <mat-card-title>{{front ? "Front" : "Back"}}</mat-card-title>
+                <mat-card-title>{{currentCardIndex + 1}} / {{cards.length}}</mat-card-title>
+            </div>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-content class="card-panel-content">
+            <span>{{front ? currentCard.front : currentCard.back}}</span>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+
+        <mat-card-actions class="card-panel-footer">
+            <button mat-raised-button (click)="backOnClick()">
+                <div class="text-with-icon"><mat-icon>arrow_back</mat-icon> Back </div>
+            </button>
+
+            <button mat-raised-button (click)="flipOnClick()">
+                <div class="text-with-icon">Flip <mat-icon>refresh</mat-icon></div>
+            </button>
+
+            <button mat-raised-button (click)="nextOnClick()">
+                <div class="text-with-icon">Next <mat-icon>arrow_forward</mat-icon></div>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

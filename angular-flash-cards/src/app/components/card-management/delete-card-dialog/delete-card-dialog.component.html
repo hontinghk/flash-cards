@@ -1,0 +1,17 @@
+<div mat-dialog-title style="text-align: center;">Delete Card</div>
+
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+  <span> Are you sure you want to delete this card?</span>
+</div>
+
+<div mat-dialog-actions>
+  <div class="horizontal-center">
+    <button mat-raised-button color="warn" (click)="onConfirmClick()">Confirm</button>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <button mat-raised-button type="button" (click)="onCloseClick()">Close</button>
+  </div>
+</div>

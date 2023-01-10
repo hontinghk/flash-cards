@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #fafafa;
+}
+
+.horizontal-center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.vertical-center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.card-panel {
+    max-width: 400px;
+    width: 80%;
+    border: solid 2px black !important
+}
+
+.card-panel-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-panel-content {
+    height: 18rem;
+    overflow:auto;
+    white-space:pre-line
+}
+
+.card-panel-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
