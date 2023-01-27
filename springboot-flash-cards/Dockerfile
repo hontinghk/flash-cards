@@ -1,3 +1,12 @@
+FROM openjdk:17 as buildstage
+WORKDIR /app
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
+RUN ./mvnw package -Dmaven.test.skip=true
+COPY target/*.jar springboot-flash-cards-docker.jar
+
 FROM openjdk:17
-ADD target/flash-cards-0.0.1-SNAPSHOT.jar springboot-flash-cards-docker.jar
+COPY --from=buildstage /app/springboot-flash-cards-docker.jar .
 ENTRYPOINT ["java", "-jar", "springboot-flash-cards-docker.jar"]
