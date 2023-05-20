@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/v1/card")
 public class CardController {
 
-    private CardService cardService;
+    private final CardService cardService;
 
     public CardController(CardService cardService) {
         this.cardService = cardService;
@@ -30,15 +30,15 @@ public class CardController {
         return new ResponseEntity<Card>(newCard, HttpStatus.CREATED);
     }
 
-    @PutMapping("")
+    @PutMapping()
     public ResponseEntity updateCard(@RequestBody Card card) {
         Card newCard = cardService.updateCard(card);
         return new ResponseEntity<Card>(newCard, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteCard(@PathVariable int id) {
-        return new ResponseEntity<Card>(cardService.deleteCard(id));
+    public ResponseEntity deleteCard(@PathVariable Long id) {
+        return new ResponseEntity<>(cardService.deleteCard(id));
     }
 
 }

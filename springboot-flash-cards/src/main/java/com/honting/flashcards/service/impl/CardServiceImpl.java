@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CardServiceImpl implements CardService {
 
-    private CardRepository cardRepository;
+    private final CardRepository cardRepository;
 
     public CardServiceImpl(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
@@ -26,18 +26,16 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Card addCard(Card card) {
-        Card newCard = cardRepository.save(card);
-        return newCard;
+        return cardRepository.save(card);
     }
 
     @Override
     public Card updateCard(Card card) {
-        Card updatedCard = cardRepository.save(card);
-        return updatedCard;
+        return cardRepository.save(card);
     }
 
     @Override
-    public HttpStatus deleteCard(int id) {
+    public HttpStatus deleteCard(Long id) {
         try {
             cardRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

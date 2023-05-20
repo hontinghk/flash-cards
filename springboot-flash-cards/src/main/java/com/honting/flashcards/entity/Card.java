@@ -17,7 +17,7 @@ public class Card {
             strategy = GenerationType.SEQUENCE,
             generator = "card_id_sequence"
     )
-    private Integer id;
+    private Long id;
 
     @Column(length = 20)
     @Size(max = 20)
@@ -40,11 +40,11 @@ public class Card {
         this.back = back;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -13,6 +13,6 @@ public interface CardService {
 
     Card updateCard(Card card);
 
-    HttpStatus deleteCard(int id);
+    HttpStatus deleteCard(Long id);
 
 }
