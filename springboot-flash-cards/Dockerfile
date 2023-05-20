@@ -3,9 +3,10 @@ WORKDIR /app
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+RUN ./mvnw dependency:go-offline
 COPY src src
-RUN ./mvnw package -Dmaven.test.skip=true
-COPY target/*.jar springboot-flash-cards-docker.jar
+RUN ./mvnw -U clean package -Dmaven.test.skip=true
+RUN mv target/*.jar springboot-flash-cards-docker.jar
 
 FROM openjdk:17
 COPY --from=buildstage /app/springboot-flash-cards-docker.jar .

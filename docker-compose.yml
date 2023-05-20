@@ -6,16 +6,18 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: flash_cards
-      PGDATA: /data/postgres
+      PGDATA: /var/lib/postgresql/data
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     restart: unless-stopped
 
   springboot:
     container_name: springboot
-    build: springboot-flash-cards/
+    build:
+      context: ./springboot-flash-cards
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
@@ -25,7 +27,9 @@ services:
 
   angular_nginx:
     container_name: angular_nginx
-    build: angular-flash-cards
+    build:
+      context: ./angular-flash-cards
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     depends_on:
