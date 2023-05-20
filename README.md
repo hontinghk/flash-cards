@@ -34,7 +34,7 @@ docker compose build
 ```
 3. Run Docker container
 ```
-docker compose run
+docker compose up
 ```
 4. Test the applciation on http://localhost:80
 
